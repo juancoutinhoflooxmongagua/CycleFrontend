@@ -1,9 +1,11 @@
 import React from 'react';
 import '../common/dependencies'
 
-export default props => (
+import Header from '../common/header';
+
+export default _props => (
     <div className='wrapper'>
-        <h1>App</h1>
+        <Header></Header>
     </div>
 )
 
