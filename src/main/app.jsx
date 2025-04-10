@@ -1,11 +1,15 @@
 import React from 'react';
-import '../common/dependencies'
-
+import '../common/dependencies';
 import Header from '../common/header';
+import Sidebar from '../common/sidebar';
 
-export default _props => (
-    <div className='wrapper'>
-        <Header></Header>
-    </div>
-)
+function App(props) {
+    return (
+        <div className='wrapper'>
+            <Header />
+            <Sidebar />
+        </div>
+    );
+}
 
+export default App;
