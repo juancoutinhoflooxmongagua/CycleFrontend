@@ -2,18 +2,26 @@ import React from 'react';
 
 function Header() {
     return (
-        <header className='main-header custom-header'>
-            <a href='/#/' className='logo custom-logo'>
-                <span className='logo-mini custom-logo-mini'><b>My</b>M</span>
-                <span className='logo-lg custom-logo-lg'>
-                    <i className='fa fa-money'></i>
-                    <b> My</b> Money
+        <header className="navbar navbar-dark bg-dark px-3">
+            <a href="/#/" className="navbar-brand d-flex align-items-center">
+                <span className="d-none d-sm-inline me-2">
+                    <i className="bi bi-cash-stack me-1"></i>
+                    <strong>My</strong> Money
+                </span>
+                <span className="d-sm-none">
+                    <strong>My</strong>M
                 </span>
             </a>
 
-            <nav className='navbar navbar-static-top custom-navbar'>
-                <a href='#' className='sidebar-toggle custom-toggle' data-toggle='offcanvas'></a>
-            </nav>
+            <button 
+                className="btn btn-dark d-lg-none" 
+                type="button" 
+                data-bs-toggle="offcanvas" 
+                data-bs-target="#sidebar" 
+                aria-controls="sidebar"
+            >
+                <i className="bi bi-list"></i>
+            </button>
         </header>
     );
 }
