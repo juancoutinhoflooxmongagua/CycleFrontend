@@ -1,7 +1,10 @@
 import React from "react";
 
-export default function BillingCycle(props) {
-    <div>
-        <h1>Ciclo de Pagamento</h1>
-    </div>
-}
+export default function BillingCycle() {
+    return (
+      <div>
+        <h1>Billing Cycle</h1>
+      </div>
+    );
+  }
+  
