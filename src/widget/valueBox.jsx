@@ -1,5 +1,4 @@
 import React from 'react'
-import Grid from '../layout/grid'
 
 const ValueBox = ({ bgColor, icon, value, text }) => (
   <div className={`card text-white ${bgColor} shadow`} style={{ borderRadius: '1rem' }}>
