@@ -1,17 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Routes from './main/routes';
-import { createStore } from 'redux'
-import { Provider } from 'react-redux'
+import { applyMiddleware, createStore } from 'redux';
+import promise from 'redux-promise';
+import { Provider } from 'react-redux';
+import App from './main/app';
+import reducers from './main/reducers';
 
-import App from './main/app'
-import reducers from './main/reducers'
-const store = createStore(reducers)
+const store = createStore(reducers, applyMiddleware(promise));
+
 ReactDOM.render(
   <Provider store={store}>
     <Routes>
-    <App />
+      <App />
     </Routes>
   </Provider>,
   document.getElementById('app')
-)
+);
