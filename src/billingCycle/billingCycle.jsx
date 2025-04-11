@@ -1,6 +1,7 @@
 import React from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
+import TabContent from "../common/tab/tabContent";
 import { selectTab, showTabs } from "../common/tab/tabActions";
 
 const BillingCycle = () => {
@@ -30,18 +31,26 @@ const BillingCycle = () => {
       </ul>
 
       <div className="tab-content card w-100" style={{ maxWidth: "600px" }}>
-        <div className="tab-pane fade show active card-body text-center" id="tabList">
-          Conteúdo da <strong>LISTA</strong>
-        </div>
-        <div className="tab-pane fade card-body text-center" id="tabCreate">
-          Conteúdo de <strong>INCLUIR</strong>
-        </div>
-        <div className="tab-pane fade card-body text-center" id="tabUpdate">
-          Conteúdo de <strong>ALTERAR</strong>
-        </div>
-        <div className="tab-pane fade card-body text-center" id="tabDelete">
-          Conteúdo de <strong>EXCLUIR</strong>
-        </div>
+        <TabContent id="tabList">
+          <div className="card-body text-center">
+            Conteúdo da <strong>LISTA</strong>
+          </div>
+        </TabContent>
+        <TabContent id="tabCreate">
+          <div className="card-body text-center">
+            Conteúdo de <strong>INCLUIR</strong>
+          </div>
+        </TabContent>
+        <TabContent id="tabUpdate">
+          <div className="card-body text-center">
+            Conteúdo de <strong>ALTERAR</strong>
+          </div>
+        </TabContent>
+        <TabContent id="tabDelete">
+          <div className="card-body text-center">
+            Conteúdo de <strong>EXCLUIR</strong>
+          </div>
+        </TabContent>
       </div>
     </div>
   );
