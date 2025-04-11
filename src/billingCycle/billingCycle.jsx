@@ -1,6 +1,9 @@
 import React from "react";
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
+import { selectTab, showTabs } from "../common/tab/tabActions";
 
-export default function BillingCycle() {
+const BillingCycle = () => {
   return (
     <div className="container mt-5 d-flex flex-column align-items-center">
       <ul className="nav nav-tabs mb-3">
@@ -42,4 +45,10 @@ export default function BillingCycle() {
       </div>
     </div>
   );
-}
+};
+
+const mapStateToProps = (state) => ({ tab: state.tab });
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators({ selectTab, showTabs }, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(BillingCycle);
