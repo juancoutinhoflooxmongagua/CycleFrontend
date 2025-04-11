@@ -1,16 +1,16 @@
 import React from 'react'
 import Grid from '../layout/grid'
 
-export default props => (
-    <Grid cols={props.cols}>
-        <div className={`small-box bg-${props.color}`}>
-            <div className='inner'>
-                <h3>{props.value}</h3>
-                <p>{props.text}</p>
-            </div>
-            <div className='icon'>
-                <i className={`fa fa-${props.icon}`}></i>
-            </div>
-        </div>
-    </Grid>
-)
+const ValueBox = ({ bgColor, icon, value, text }) => (
+  <div className={`card text-white ${bgColor} shadow`} style={{ borderRadius: '1rem' }}>
+    <div className="card-body d-flex align-items-center">
+      <i className={`${icon} fa-3x me-4`}></i>
+      <div>
+        <h6 className="mb-1">{text}</h6>
+        <h4 className="fw-bold">{value}</h4>
+      </div>
+    </div>
+  </div>
+);
+
+export default ValueBox;
