@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux';
 import { getSummary } from './dashboardActions'
 
-
 class Dashboard extends Component {
   componentWillMount() {
     this.props.getSummary()
