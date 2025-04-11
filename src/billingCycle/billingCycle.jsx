@@ -1,10 +1,16 @@
 import React, { Component } from "react";
+import Tabs from "../common/tab/tabs";
+import TabsHeader from "../common/tab/tabsHeader";
+import TabsContent from "../common/tab/tabsContent";
 
 export default class BillingCycle extends Component {
   render() {
     return (
       <div>
-        <h1>Billing Cycle</h1>
+        <Tabs>
+          <TabsHeader />
+          <TabsContent />
+        </Tabs>
       </div>
     );
   }
