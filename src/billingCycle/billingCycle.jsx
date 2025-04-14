@@ -2,6 +2,7 @@ import React from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import TabContent from "../common/tab/tabContent";
+import BillingCycleList from "./billingCycleList";
 import { selectTab, showTabs } from "../common/tab/tabActions";
 
 const BillingCycle = () => {
@@ -33,7 +34,7 @@ const BillingCycle = () => {
       <div className="tab-content card w-100" style={{ maxWidth: "600px" }}>
         <TabContent id="tabList">
           <div className="card-body text-center">
-            Conteúdo da <strong>LISTA</strong>
+            <BillingCycleList />
           </div>
         </TabContent>
         <TabContent id="tabCreate">
