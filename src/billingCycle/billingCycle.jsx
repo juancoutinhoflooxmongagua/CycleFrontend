@@ -5,7 +5,7 @@ import TabContent from "../common/tab/tabContent";
 import BillingCycleList from "./billingCycleList";
 import { selectTab, showTabs } from "../common/tab/tabActions";
 import BillingCycleForm from "./billingCycleForm";
-import { createBillingCycle } from './billingCycleActions'; // Certifique-se de importar a ação
+import { createBillingCycle } from './billingCycleActions';
 
 const BillingCycle = () => {
   return (
@@ -41,7 +41,7 @@ const BillingCycle = () => {
         </TabContent>
         <TabContent id="tabCreate">
           <div className="card-body text-center">
-            <BillingCycleForm></BillingCycleForm>
+            <BillingCycleForm />
           </div>
         </TabContent>
         <TabContent id="tabUpdate">
@@ -56,11 +56,10 @@ const BillingCycle = () => {
         </TabContent>
       </div>
     </div>
-  );
-};
+  )
+}
 
-const mapStateToProps = (state) => ({ tab: state.tab });
-const mapDispatchToProps = (dispatch) =>
-  bindActionCreators({ selectTab, showTabs, create: createBillingCycle }, dispatch); // Corrigido
+const mapDispatchToProps = dispatch =>
+  bindActionCreators({ selectTab, showTabs }, dispatch)
 
-export default connect(mapStateToProps, mapDispatchToProps)(BillingCycle);
+export default connect(null, mapDispatchToProps)(BillingCycle)

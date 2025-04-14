@@ -1,33 +1,39 @@
-import axios from 'axios'
+import axios from 'axios';
+import { toastr } from 'react-redux-toastr';
 
-const BASE_URL = 'http://localhost:3003/api/billingCycles'
+const BASE_URL = 'http://localhost:3003/api';
 
 export function getList() {
-    const request = axios.get(BASE_URL) // Removido o '/billingCycles'
+    const request = axios.get(`${BASE_URL}/billingCycles`);
     return {
         type: 'BILLING_CYCLES_FETCHED',
         payload: request
-    }
+    };
 }
 
-export function create(values) {
-    return submit(values, 'post')
-}
-
-function submit(values, method) {
+export function createBillingCycle(values) {
     return dispatch => {
-        axios[method](BASE_URL, values) // Removido o '/billingCycles'
+        const id = values._id ? values._id : '';
+
+        axios.post(`${BASE_URL}/billingCycles${id ? '/' + id : ''}`, values, {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
             .then(resp => {
-                dispatch({
-                    type: 'BILLING_CYCLE_CREATED',
-                    payload: resp.data
-                })
+                toastr.success('Sucesso', 'Operação realizada com sucesso.');
+                dispatch(getList()); // Atualiza a lista após o POST
             })
-            .catch(err => {
-                dispatch({
-                    type: 'BILLING_CYCLE_CREATION_ERROR',
-                    payload: err.response.data
-                })
-            })
-    }
+            .catch(e => {
+                if (e.response) {
+                    if (e.response.data && e.response.data.errors) {
+                        e.response.data.errors.forEach(error => toastr.error('Erro', error));
+                    } else {
+                        toastr.error('Erro', `Erro do servidor: ${e.response.statusText}`);
+                    }
+                } else {
+                    toastr.error('Erro', 'Erro desconhecido. Verifique o servidor.');
+                }
+            });
+    };
 }

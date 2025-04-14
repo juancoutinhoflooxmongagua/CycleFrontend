@@ -1,36 +1,36 @@
-import React from 'react'
-import { reduxForm, Field } from 'redux-form'
+import React from 'react';
+import { reduxForm, Field } from 'redux-form';
+import { connect } from 'react-redux';
+import { createBillingCycle } from './billingCycleActions'; 
 
-const BillingCycleForm = (props) => {
-  const { handleSubmit } = props
-
+const BillingCycleForm = ({ handleSubmit, createBillingCycle }) => {
+  
   const onSubmit = (values) => {
-    console.log('Form values:', values)
-  }
+    createBillingCycle(values);  
+  };
 
   return (
-    <form role="form" onSubmit={handleSubmit(onSubmit)}>
-      <div className="box-body">
-        <div className="form-group">
-          <label>Nome</label>
-          <Field name="name" component="input" className="form-control" />
-        </div>
-        <div className="form-group">
-          <label>Mês</label>
-          <Field name="month" component="input" type="number" className="form-control" />
-        </div>
-        <div className="form-group">
-          <label>Ano</label>
-          <Field name="year" component="input" type="number" className="form-control" />
-        </div>
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <div className="form-group">
+        <label>Nome</label>
+        <Field name="name" component="input" className="form-control" />
       </div>
-      <div className="box-footer">
-        <button type="submit" className="btn btn-primary">
-          Submit
-        </button>
+      <div className="form-group">
+        <label>Mês</label>
+        <Field name="month" component="input" type="number" className="form-control" />
       </div>
+      <div className="form-group">
+        <label>Ano</label>
+        <Field name="year" component="input" type="number" className="form-control" />
+      </div>
+      <button type="submit" className="btn btn-primary mt-3">Salvar</button>
     </form>
-  )
-}
+  );
+};
 
-export default reduxForm({ form: 'billingCycleForm' })(BillingCycleForm)
+const formWrapped = reduxForm({
+  form: 'billingCycleForm',
+  onSubmit: createBillingCycle  
+})(BillingCycleForm);
+
+export default connect(null, { createBillingCycle })(formWrapped);
