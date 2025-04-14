@@ -1,22 +1,16 @@
 import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { getList } from './billingCycleActions'
+import { getList, showUpdate, showDelete } from './billingCycleActions'
 
 class BillingCycleList extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      showActions: false,
-      selectedItem: null
-    }
-  }
-
   componentDidMount() {
+    // Chama getList para obter a lista de ciclos de cobrança
     this.props.getList()
   }
 
   renderRows() {
+    // Pegue a lista de ciclos de cobrança do estado
     const list = this.props.billingCycle.list || []
     return list.map((item, index) => (
       <tr key={index}>
@@ -25,17 +19,17 @@ class BillingCycleList extends Component {
         <td>{item.year}</td>
         <td>
           <button 
-            className="btn btn-info" 
-            onClick={() => this.setState({ showActions: !this.state.showActions, selectedItem: item })}
+            className="btn btn-warning me-2" 
+            onClick={() => this.props.showUpdate(item)} // Passa o item para a ação de edição
           >
-            Ações
+            Editar
           </button>
-          {this.state.showActions && this.state.selectedItem === item && (
-            <div>
-              <button className="btn btn-warning mt-2">Editar</button>
-              <button className="btn btn-danger mt-2 ms-2">Excluir</button>
-            </div>
-          )}
+          <button 
+            className="btn btn-danger" 
+            onClick={() => this.props.showDelete(item)} // Passa o item para a ação de exclusão
+          >
+            Excluir
+          </button>
         </td>
       </tr>
     ))
@@ -62,11 +56,14 @@ class BillingCycleList extends Component {
   }
 }
 
+// Mapeamento do estado para as props
 const mapStateToProps = state => ({
   billingCycle: state.billingCycle
 })
 
+// Mapeamento das ações para as props
 const mapDispatchToProps = dispatch =>
-  bindActionCreators({ getList }, dispatch)
+  bindActionCreators({ getList, showUpdate, showDelete }, dispatch)
 
+// Conecta o componente ao Redux
 export default connect(mapStateToProps, mapDispatchToProps)(BillingCycleList)

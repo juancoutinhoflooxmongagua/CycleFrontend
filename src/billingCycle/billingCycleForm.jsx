@@ -1,12 +1,11 @@
 import React from 'react';
 import { reduxForm, Field } from 'redux-form';
 import { connect } from 'react-redux';
-import { createBillingCycle } from './billingCycleActions'; 
+import { create } from './billingCycleActions'; // <- usa a action real
 
-const BillingCycleForm = ({ handleSubmit, createBillingCycle }) => {
-  
+const BillingCycleForm = ({ handleSubmit, create }) => {
   const onSubmit = (values) => {
-    createBillingCycle(values);  
+    create(values);
   };
 
   return (
@@ -29,8 +28,7 @@ const BillingCycleForm = ({ handleSubmit, createBillingCycle }) => {
 };
 
 const formWrapped = reduxForm({
-  form: 'billingCycleForm',
-  onSubmit: createBillingCycle  
+  form: 'billingCycleForm'
 })(BillingCycleForm);
 
-export default connect(null, { createBillingCycle })(formWrapped);
+export default connect(null, { create })(formWrapped);
