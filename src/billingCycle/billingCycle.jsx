@@ -4,6 +4,8 @@ import { connect } from "react-redux";
 import TabContent from "../common/tab/tabContent";
 import BillingCycleList from "./billingCycleList";
 import { selectTab, showTabs } from "../common/tab/tabActions";
+import BillingCycleForm from "./billingCycleForm";
+import { createBillingCycle } from './billingCycleActions'; // Certifique-se de importar a ação
 
 const BillingCycle = () => {
   return (
@@ -39,7 +41,7 @@ const BillingCycle = () => {
         </TabContent>
         <TabContent id="tabCreate">
           <div className="card-body text-center">
-            Conteúdo de <strong>INCLUIR</strong>
+            <BillingCycleForm></BillingCycleForm>
           </div>
         </TabContent>
         <TabContent id="tabUpdate">
@@ -59,6 +61,6 @@ const BillingCycle = () => {
 
 const mapStateToProps = (state) => ({ tab: state.tab });
 const mapDispatchToProps = (dispatch) =>
-  bindActionCreators({ selectTab, showTabs }, dispatch);
+  bindActionCreators({ selectTab, showTabs, create: createBillingCycle }, dispatch); // Corrigido
 
 export default connect(mapStateToProps, mapDispatchToProps)(BillingCycle);
