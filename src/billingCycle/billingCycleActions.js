@@ -37,3 +37,10 @@ export function createBillingCycle(values) {
             });
     };
 }
+
+export function showUpdate(billingCycle) {
+    return {
+        type: 'BILLING_CYCLE_SELECTED',
+        payload: billingCycle
+    };
+}

@@ -21,16 +21,8 @@ const BillingCycle = () => {
             <i className="fa fa-plus me-2"></i>Incluir
           </a>
         </li>
-        <li className="nav-item">
-          <a className="nav-link" href="#tabUpdate" data-bs-toggle="tab">
-            <i className="fa fa-pencil me-2"></i>Alterar
-          </a>
-        </li>
-        <li className="nav-item">
-          <a className="nav-link" href="#tabDelete" data-bs-toggle="tab">
-            <i className="fa fa-trash-o me-2"></i>Excluir
-          </a>
-        </li>
+       
+      
       </ul>
 
       <div className="tab-content card w-100" style={{ maxWidth: "600px" }}>
