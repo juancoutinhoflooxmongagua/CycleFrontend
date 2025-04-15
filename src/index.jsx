@@ -4,7 +4,6 @@ import { applyMiddleware, createStore, compose } from 'redux';
 import { Provider } from 'react-redux';
 import promise from 'redux-promise';
 import thunk from 'redux-thunk';
-import multi from 'redux-multi';
 
 import Routes from './main/routes';
 import App from './main/app';
@@ -15,7 +14,7 @@ const devTools = window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_
 const store = createStore(
   reducers,
   compose(
-    applyMiddleware(multi, promise, thunk),
+    applyMiddleware(promise, thunk),
     devTools || (f => f)
   )
 );

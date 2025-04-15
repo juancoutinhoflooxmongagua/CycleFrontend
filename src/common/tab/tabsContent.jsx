@@ -1,7 +1,7 @@
-import React from 'react';
+import React from 'react'
 
 export default props => (
-  <div id={props.id} className='tab-pane'>
-    {props.children}
-  </div>
-);
+    <div className='tab-content'> 
+        {props.children}
+    </div> 
+)
