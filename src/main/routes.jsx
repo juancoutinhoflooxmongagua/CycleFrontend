@@ -8,9 +8,9 @@ export default props => (
 
         <Router history={hashHistory}>
             <Route path='/' component={App}>
-            <IndexRoute component={Dashboard} />
-                <Route path='billingCycles' component={BillingCycle} />
-                </Route>
-            <Redirect from='*' to='/' />
+                <IndexRoute component={Dashboard} />
+            <Route path='billingCycles' component={BillingCycle} />
+            </Route>
+                <Redirect from='*' to='/' />
         </Router>
 )

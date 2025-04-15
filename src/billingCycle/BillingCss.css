@@ -3,10 +3,8 @@
 .container {
     max-width: 1200px;
     margin: 0 auto;
+    padding: 20px;
 }
-
-
-/* Cabeçalho do conteúdo */
 
 .content-header {
     background-color: #f8f9fa;
@@ -79,9 +77,6 @@
     color: white;
 }
 
-
-/* Botões de ação */
-
 .btn-primary {
     background-color: #007bff;
     border-color: #007bff;
@@ -100,9 +95,6 @@
 .btn:hover {
     opacity: 0.9;
 }
-
-
-/* Formulários */
 
 .form-control {
     margin-bottom: 15px;
