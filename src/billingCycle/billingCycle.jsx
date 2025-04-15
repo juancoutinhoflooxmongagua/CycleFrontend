@@ -1,57 +1,62 @@
-import React from "react";
-import { bindActionCreators } from "redux";
-import { connect } from "react-redux";
-import TabContent from "../common/tab/tabContent";
-import BillingCycleList from "./billingCycleList";
-import { selectTab, showTabs } from "../common/tab/tabActions";
-import BillingCycleForm from "./billingCycleForm";
-import { createBillingCycle } from './billingCycleActions';
+import React, { Component } from 'react'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
 
-const BillingCycle = () => {
-  return (
-    <div className="container mt-5 d-flex flex-column align-items-center">
-      <ul className="nav nav-tabs mb-3">
-        <li className="nav-item">
-          <a className="nav-link active" href="#tabList" data-bs-toggle="tab">
-            <i className="fa fa-bars me-2"></i>Listar
-          </a>
-        </li>
-        <li className="nav-item">
-          <a className="nav-link" href="#tabCreate" data-bs-toggle="tab">
-            <i className="fa fa-plus me-2"></i>Incluir
-          </a>
-        </li>
-       
-      
-      </ul>
+import ContentHeader from '../common/template/contentHeader'
+import Content from '../common/template/content'
+import Tabs from '../common/tab/tabs'
+import TabsHeader from '../common/tab/tabsHeader'
+import TabsContent from '../common/tab/tabsContent'
+import TabHeader from '../common/tab/tabHeader'
+import TabContent from '../common/tab/tabContent'
+import { init, create, update, remove } from './billingCycleActions'
 
-      <div className="tab-content card w-100" style={{ maxWidth: "600px" }}>
-        <TabContent id="tabList">
-          <div className="card-body text-center">
-            <BillingCycleList />
-          </div>
-        </TabContent>
-        <TabContent id="tabCreate">
-          <div className="card-body text-center">
-            <BillingCycleForm />
-          </div>
-        </TabContent>
-        <TabContent id="tabUpdate">
-          <div className="card-body text-center">
-            Conteúdo de <strong>ALTERAR</strong>
-          </div>
-        </TabContent>
-        <TabContent id="tabDelete">
-          <div className="card-body text-center">
-            Conteúdo de <strong>EXCLUIR</strong>
-          </div>
-        </TabContent>
-      </div>
-    </div>
-  )
+import List from './billingCycleList'
+import Form from './billingCycleForm'
+
+class BillingCycle extends Component {
+
+    componentWillMount() {
+        this.props.init()
+    }
+
+    render() {
+        return (
+            <div> 
+                <ContentHeader title='Ciclos de Pagamentos' small='Cadastro' />
+                <Content> 
+                    <Tabs> 
+                        <TabsHeader> 
+                            <TabHeader label='Listar' icon='bars' target='tabList' />
+                            <TabHeader label='Incluir' icon='plus' target='tabCreate' />
+                            <TabHeader label='Alterar' icon='pencil' target='tabUpdate' />
+                            <TabHeader label='Excluir' icon='trash-o' target='tabDelete' />
+                        </TabsHeader> 
+                        <TabsContent> 
+                            <TabContent id='tabList'>
+                                <List />
+                            </TabContent>
+                            <TabContent id='tabCreate'>
+                                <Form onSubmit={this.props.create}
+                                    submitLabel='Incluir' submitClass='primary' />
+                            </TabContent>
+                            <TabContent id='tabUpdate'>
+                                <Form onSubmit={this.props.update}
+                                    submitLabel='Alterar' submitClass='info' />
+                            </TabContent>
+                            <TabContent id='tabDelete'>
+                                <Form onSubmit={this.props.remove} readOnly={true}
+                                    submitLabel='Excluir' submitClass='danger' />
+                            </TabContent>
+                        </TabsContent> 
+                    </Tabs> 
+                </Content> 
+            </div> 
+        )
+    }
 }
 
-const mapDispatchToProps = dispatch =>
-  bindActionCreators({ selectTab, showTabs }, dispatch)
-
+const mapDispatchToProps = dispatch => bindActionCreators({
+    init, create, update, remove
+}, dispatch)
 export default connect(null, mapDispatchToProps)(BillingCycle)

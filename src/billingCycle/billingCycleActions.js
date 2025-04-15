@@ -1,46 +1,66 @@
-import axios from 'axios';
-import { toastr } from 'react-redux-toastr';
+import axios from 'axios'
+import { toastr } from 'react-redux-toastr'
+import { reset as resetForm, initialize } from 'redux-form'
+import { showTabs, selectTab } from '../common/tab/tabActions'
 
-const BASE_URL = 'http://localhost:3003/api';
+const BASE_URL = 'http://localhost:3003/api'
+const INITIAL_VALUES = { credits: [{}], debts: [{}] }
 
 export function getList() {
-    const request = axios.get(`${BASE_URL}/billingCycles`);
+    const request = axios.get(`${BASE_URL}/billingCycles`)
     return {
         type: 'BILLING_CYCLES_FETCHED',
         payload: request
-    };
+    }
 }
 
-export function createBillingCycle(values) {
-    return dispatch => {
-        const id = values._id ? values._id : '';
+export function create(values) {
+    return submit(values, 'post')
+}
 
-        axios.post(`${BASE_URL}/billingCycles${id ? '/' + id : ''}`, values, {
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            })
+export function update(values) {
+    return submit(values, 'put')
+}
+
+export function remove(values) {
+    return submit(values, 'delete')
+}
+
+function submit(values, method) {
+    return dispatch => {
+        const id = values._id ? values._id : ''
+        axios[method](`${BASE_URL}/billingCycles/${id}`, values)
             .then(resp => {
-                toastr.success('Sucesso', 'Operação realizada com sucesso.');
-                dispatch(getList()); // Atualiza a lista após o POST
+                toastr.success('Sucesso', 'Operação Realizada com sucesso.')
+                dispatch(init())
             })
             .catch(e => {
-                if (e.response) {
-                    if (e.response.data && e.response.data.errors) {
-                        e.response.data.errors.forEach(error => toastr.error('Erro', error));
-                    } else {
-                        toastr.error('Erro', `Erro do servidor: ${e.response.statusText}`);
-                    }
-                } else {
-                    toastr.error('Erro', 'Erro desconhecido. Verifique o servidor.');
-                }
-            });
-    };
+                e.response.data.errors.forEach(error => toastr.error('Erro', error))
+            })
+    }
 }
 
 export function showUpdate(billingCycle) {
-    return {
-        type: 'BILLING_CYCLE_SELECTED',
-        payload: billingCycle
-    };
+    return [
+        showTabs('tabUpdate'),
+        selectTab('tabUpdate'),
+        initialize('billingCycleForm', billingCycle)
+    ]
+}
+
+export function showDelete(billingCycle) {
+    return [
+        showTabs('tabDelete'),
+        selectTab('tabDelete'),
+        initialize('billingCycleForm', billingCycle)
+    ]
+}
+
+export function init() {
+    return [
+        showTabs('tabList', 'tabCreate'),
+        selectTab('tabList'),
+        getList(),
+        initialize('billingCycleForm', INITIAL_VALUES)
+    ]
 }
