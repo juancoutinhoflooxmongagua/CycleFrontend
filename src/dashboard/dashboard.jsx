@@ -17,16 +17,39 @@ class Dashboard extends Component {
         const { credit, debt } = this.props.summary
         return (
             <div>
-                <ContentHeader title='Dashboard' small='Versão 1.0' />
+                <ContentHeader title='Dashboard' small='Super eficiente' />
                 <Content>
-                    <Row>
-                        <ValueBox cols='12 4' color='green' icon='bank'
-                            value={`R$ ${credit}`} text='Total de Créditos' />
-                        <ValueBox cols='12 4' color='red' icon='credit-card'
-                            value={`R$ ${debt}`} text='Total de Débitos' />
-                        <ValueBox cols='12 4' color='blue' icon='money'
-                            value={`R$ ${credit - debt}`} text='Valor Consolidado' />
-                    </Row>
+                    <div className="container mt-4">
+                        <Row>
+                            <div className="col-md-4">
+                                <ValueBox
+                                    cols='12 4'
+                                    color='green'
+                                    icon='bank'
+                                    value={`R$ ${credit}`}
+                                    text='Total de Créditos'
+                                />
+                            </div>
+                            <div className="col-md-4">
+                                <ValueBox
+                                    cols='12 4'
+                                    color='red'
+                                    icon='credit-card'
+                                    value={`R$ ${debt}`}
+                                    text='Total de Débitos'
+                                />
+                            </div>
+                            <div className="col-md-4">
+                                <ValueBox
+                                    cols='12 4'
+                                    color='blue'
+                                    icon='money'
+                                    value={`R$ ${credit - debt}`}
+                                    text='Valor Consolidado'
+                                />
+                            </div>
+                        </Row>
+                    </div>
                 </Content>
             </div>
         )
